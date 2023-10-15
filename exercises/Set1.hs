@@ -75,8 +75,10 @@ eeny x = if even x then "eeny" else "meeny"
 checkPassword :: String -> String
 checkPassword password = if password == "swordfish"
                          then "You're in."
+                         else if password == "mellon"
+                         then "You're in."
                          else "ACCESS DENIED!"
-
+                         
 ------------------------------------------------------------------------------
 -- Ex 7: A postal service prices packages the following way.
 -- Packages that weigh up to 500 grams cost 250 credits.
