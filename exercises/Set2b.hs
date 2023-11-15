@@ -104,11 +104,11 @@ leftpad str n
 -- * you'll probably need a recursive helper function
 
 countdown :: Integer -> String
-countdown n = "Ready!" ++ countdownHelper n ++ " Liftoff!"
+countdown n = "Ready!" ++ countdownhelper n ++ " Liftoff!"
 
-countdownHelper :: Integer -> String
-countdownHelper 0 = ""
-countdownHelper n = " " ++ show n ++ "..." ++ countdownHelper (n - 1)
+countdownhelper :: Integer -> String
+countdownhelper 0 = ""
+countdownhelper n = " " ++ show n ++ "..." ++ countdownhelper (n - 1)
 
 ------------------------------------------------------------------------------
 -- Ex 6: implement the function smallestDivisor that returns the
@@ -126,7 +126,13 @@ countdownHelper n = " " ++ show n ++ "..." ++ countdownHelper (n - 1)
 -- Hint: remember the mod function!
 
 smallestDivisor :: Integer -> Integer
-smallestDivisor = todo
+smallestDivisor n = findsmall n 2
+
+findsmall :: Integer -> Integer -> Integer
+findsmall n k
+  | n `mod` k == 0 = k
+  | otherwise = findsmall n (k+1)
+
 
 ------------------------------------------------------------------------------
 -- Ex 7: implement a function isPrime that checks if the given number
@@ -135,7 +141,10 @@ smallestDivisor = todo
 -- Ps. 0 and 1 are not prime numbers
 
 isPrime :: Integer -> Bool
-isPrime = todo
+isPrime n
+  | n <= 1 = False
+  | n == smallestDivisor n = True
+  | otherwise = False
 
 ------------------------------------------------------------------------------
 -- Ex 8: implement a function biggestPrimeAtMost that returns the
