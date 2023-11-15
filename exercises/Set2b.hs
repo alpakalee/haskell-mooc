@@ -89,7 +89,7 @@ leftpad :: String -> Int -> String
 leftpad str n
   | length str >= n = str
   | otherwise = leftpad (' ' : str) n
-  
+
 ------------------------------------------------------------------------------
 -- Ex 5: let's make a countdown for a rocket! Given a number, you
 -- should produce a string that says "Ready!", counts down from the
@@ -104,7 +104,11 @@ leftpad str n
 -- * you'll probably need a recursive helper function
 
 countdown :: Integer -> String
-countdown = todo
+countdown n = "Ready!" ++ countdownHelper n ++ " Liftoff!"
+
+countdownHelper :: Integer -> String
+countdownHelper 0 = ""
+countdownHelper n = " " ++ show n ++ "..." ++ countdownHelper (n - 1)
 
 ------------------------------------------------------------------------------
 -- Ex 6: implement the function smallestDivisor that returns the
