@@ -133,7 +133,6 @@ findsmall n k
   | n `mod` k == 0 = k
   | otherwise = findsmall n (k+1)
 
-
 ------------------------------------------------------------------------------
 -- Ex 7: implement a function isPrime that checks if the given number
 -- is a prime number. Use the function smallestDivisor.
