@@ -267,8 +267,8 @@ multiCompose (f:fs) x = f (multiCompose fs x)
 --   multiApp id [head, (!!2), last] "axbxc" ==> ['a','b','c'] i.e. "abc"
 --   multiApp sum [head, (!!2), last] [1,9,2,9,3] ==> 6
 
-multiApp = todo
-
+multiApp :: (b -> c) -> [a -> b] -> a -> c
+multiApp f gs x = map (\g -> f (g x)) gs
 ------------------------------------------------------------------------------
 -- Ex 14: in this exercise you get to implement an interpreter for a
 -- simple language. You should keep track of the x and y coordinates,
