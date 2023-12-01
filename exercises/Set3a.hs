@@ -267,8 +267,8 @@ multiCompose (f:fs) x = f (multiCompose fs x)
 --   multiApp id [head, (!!2), last] "axbxc" ==> ['a','b','c'] i.e. "abc"
 --   multiApp sum [head, (!!2), last] [1,9,2,9,3] ==> 6
 
-multiApp :: (b -> c) -> [a -> b] -> a -> c
-multiApp f gs x = map (\g -> f (g x)) gs
+multiApp :: ([b] -> c) -> [a -> b] -> a -> c
+multiApp f gs x = f (map (\g -> g x) gs)
 ------------------------------------------------------------------------------
 -- Ex 14: in this exercise you get to implement an interpreter for a
 -- simple language. You should keep track of the x and y coordinates,
@@ -305,15 +305,12 @@ interpreter :: [String] -> [String]
 interpreter commands = interpret 0 0 commands []
 
 interpret :: Int -> Int -> [String] -> [String] -> [String]
-interpret _ _ [] result = result
-interpret x y (cmd:cmds) result =
-  interpret x' y' cmds result'
-  where
-    (x', y', result') =
-      | cmd == "up" = (x, y + 1, result ++ [show y])
-      | cmd == "down" = (x, y - 1, result ++ [show y])
-      | cmd == "left" = (x - 1, y, result ++ [show x])
-      | cmd == "right" = (x + 1, y, result ++ [show x])
-      | cmd == "printX" = (x, y, result ++ [show x])
-      | cmd == "printY" = (x, y, result ++ [show y])
-      | otherwise = (x, y, result)
+interpret x y [] result = result
+interpret x y (cmd:cmds) result
+  | cmd == "up"      = interpret x (y + 1) cmds result
+  | cmd == "down"    = interpret x (y - 1) cmds result
+  | cmd == "left"    = interpret (x - 1) y cmds result
+  | cmd == "right"   = interpret (x + 1) y cmds result
+  | cmd == "printX"  = interpret x y cmds (result ++ [show x])
+  | cmd == "printY"  = interpret x y cmds (result ++ [show y])
+  | otherwise        = interpret x y cmds result
