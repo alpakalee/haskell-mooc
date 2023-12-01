@@ -123,7 +123,7 @@ capitalizeFirst (c:cs) = toUpper c : cs
 --   * the function takeWhile
 
 powers :: Int -> Int -> [Int]
-powers k max = todo
+powers k max = takeWhile (<= max) (map (k^) [0..])
 
 ------------------------------------------------------------------------------
 -- Ex 7: implement a functional while loop. While should be a function
