@@ -122,8 +122,11 @@ sorted (x1:x2:xs) = x1 <= x2 && sorted (x2:xs)
 -- Use pattern matching and recursion (and the list constructors : and [])
 
 sumsOf :: [Int] -> [Int]
-sumsOf xs = todo
-
+sumsOf xs = sumsOfHelper xs 0
+  where
+    sumsOfHelper :: [Int] -> Int -> [Int]
+    sumsOfHelper [] _ = []
+    sumsOfHelper (x:xs) sumnum = (sumnum + x) : sumsOfHelper xs (sumnum + x)
 ------------------------------------------------------------------------------
 -- Ex 7: implement the function merge that merges two sorted lists of
 -- Ints into a sorted list
