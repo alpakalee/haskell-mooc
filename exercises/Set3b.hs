@@ -166,7 +166,12 @@ merge (x:xs) (y:ys)
 --     ==> ("Mouse",8)
 
 mymaximum :: (a -> a -> Bool) -> a -> [a] -> a
-mymaximum bigger initial xs = todo
+mymaximum _ initial [] = initial
+mymaximum func initial (x:xs)
+  | func x maxNum = mymaximum func x xs
+  | otherwise = mymaximum func maxNum xs
+  where
+    maxNum = if bigger initial x then initial else x
 
 ------------------------------------------------------------------------------
 -- Ex 9: define a version of map that takes a two-argument function
