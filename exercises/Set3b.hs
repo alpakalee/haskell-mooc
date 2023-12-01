@@ -109,8 +109,9 @@ indexDefault (x:xs) i def
 --   sorted [7,2,7] ==> False
 
 sorted :: [Int] -> Bool
-sorted xs = todo
-
+sorted [] = True
+sorted [_] = True
+sorted (x1:x2:xs) = x1 <= x2 && sorted (x2:xs)
 ------------------------------------------------------------------------------
 -- Ex 6: compute the partial sums of the given list like this:
 --
