@@ -167,9 +167,9 @@ merge (x:xs) (y:ys)
 
 mymaximum :: (a -> a -> Bool) -> a -> [a] -> a
 mymaximum _ initial [] = initial
-mymaximum func initial (x:xs)
-  | func x maxNum = mymaximum func x xs
-  | otherwise = mymaximum func maxNum xs
+mymaximum bigger initial (x:xs)
+  | bigger x maxNum = mymaximum bigger x xs
+  | otherwise = mymaximum bigger maxNum xs
   where
     maxNum = if bigger initial x then initial else x
 
@@ -185,7 +185,9 @@ mymaximum func initial (x:xs)
 -- Use recursion and pattern matching. Do not use any library functions.
 
 map2 :: (a -> b -> c) -> [a] -> [b] -> [c]
-map2 f as bs = todo
+map2 _ [] _ = []
+map2 _ _ [] = []
+map2 f (x:xs) (y:ys) = f x y : map2 f xs ys
 
 ------------------------------------------------------------------------------
 -- Ex 10: implement the function maybeMap, which works a bit like a
