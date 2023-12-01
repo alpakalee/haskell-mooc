@@ -207,7 +207,11 @@ joinToLength len xs = [s1 ++ s2 | s1 <- xs, s2 <- xs, length s1 + length s2 == l
 --   [1,2,3] +|+ [4,5,6]  ==> [1,4]
 --   [] +|+ [True]        ==> [True]
 --   [] +|+ []            ==> []
-
+(+|+) :: [a] -> [a] -> [a]
+[] +|+ [] = []
+[] +|+ (y:ys) = [y]
+(x:xs) +|+ [] = [x]
+(x:xs) +|+ (y:ys) = [x, y]
 
 ------------------------------------------------------------------------------
 -- Ex 11: remember the lectureParticipants example from Lecture 2? We
